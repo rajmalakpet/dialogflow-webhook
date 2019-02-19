@@ -16,9 +16,9 @@ app.get("/getToken", (req, res, next) => {
     new Promise((resolve) => {
             tokens.get({
                 // use the email address of the service account, as seen in the API console
-                email: process.env.email_id,
+                email: (process.env.NODE_ENV == "production") ? JSON.parse(process.env.email_id) : process.env.email_id,
                 // use the PEM file we generated from the downloaded key
-                key: process.env.private_key,
+                key: (process.env.NODE_ENV == "production") ? JSON.parse(process.env.private_key) : process.env.private_key,
                 // specify the scopes you wish to access
                 scopes: ['https://www.googleapis.com/auth/cloud-platform']
             },
