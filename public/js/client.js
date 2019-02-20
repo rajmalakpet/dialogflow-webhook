@@ -24,17 +24,26 @@ app.controller('gblController', ['$scope', 'botAPI', function($scope, botAPI){
             return
         }
         var _localCopy = $scope.userSearchQuery;
-        $scope.conversationArr.push({text:"<div style='color:green'>"+_localCopy+"</div>"}); 
+        $scope.conversationArr.push({text:"<div class='row userTypedContainer'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'><div><span class='badge'>You:</span></div><div class='userTyped'><span>&nbsp;&nbsp;"+_localCopy+"</span></div></div></div>"}); 
         $scope.userSearchQuery = "";
 
         botAPI.callBOTAPI(_localCopy).then((response) => {
             console.log('botAPI.callbotapi success result: ', JSON.stringify(response));
             var _botdefaultResponse = typeof(response.data.queryResult.fulfillmentText) !== "undefined" ? response.data.queryResult.fulfillmentText : "";
-            $scope.conversationArr.push({text:"<div style='color:red'>"+_botdefaultResponse+"</div>"}); 
+            $scope.conversationArr.push({text:"<div class='row userTypedContainer'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'><div><img src='./img/chatbot_icon.gif' style='height:40px;width:40px;'></div><div class='botTyped'><span>"+_botdefaultResponse+"</span></div></div></div>"}); 
+            $scope.$emit('animateScroll', '<==== scroll to bottom ====>');
         }, (err) => {
             console.log('botAPI.callbotapi error: ',err);
+            $scope.$emit('animateScroll', '<==== scroll to bottom ====>');
         })
     }
+
+    $scope.$on('animateScroll', function (event, data) {
+        console.log('<==== animateScroll triggered: ' + event + ' : ' + data);
+        $("#conversationBox").animate({ scrollTop: $('#conversationBox')[0].scrollHeight });
+    });
+
+
 }]);
 
 app.run(['$rootScope', 'ajax', function($rootScope, ajax){
