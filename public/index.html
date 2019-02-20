@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="chatbot">
+
+<head>
+    <title>Food TakeOut</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+
+<body ng-controller="gblController">
+    <div class="container">
+        <div class="alert alert-success text-center">
+            <h3>Chatbot at your service - Food TakeOut Demo</h3>
+        </div>
+        <div>Menu</div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6">
+                <form data-ng-submit="botSubmit()">
+                    <div class="input-group">
+                        <input id="voice-text" data-ng-focus="preparechatUI()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" type="text" data-ng-model="userSearchQuery" class="form-control" placeholder="ready to order food?">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">Send</button>
+                        </span>
+                    </div>
+                </form> 
+                <br><br>
+                <div id="conversationBox" data-ng-class="{'expand':expandConversationBox}">
+                    <br>
+                    <div class="list-group special" style="margin-bottom:0px">
+                        <div class="list-group-item" style="padding:0px 0px;margin:2px 0px;" data-ng-repeat="item in conversationArr" compile="item.text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/client.js"></script>
+
+</body>
+
+</html>

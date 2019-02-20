@@ -1,5 +1,6 @@
 var express = require('express')
 var app = express()
+var path = require('path')
 var port = process.env.PORT || 8080;
 if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
 var bodyParser = require('body-parser')
@@ -8,6 +9,13 @@ tokens = new TokenCache();
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get('/', (req, res) => {
+    console.log(' root was hit')
+    res.sendFile(path.join(__dirname, '../public', 'index.html'))
+})
 
 app.get("/getToken", (req, res, next) => {
     console.log('<=== /getToken was hit: ', process.env.NODE_ENV);
