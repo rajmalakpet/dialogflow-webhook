@@ -2,94 +2,13 @@
 <html ng-app="chatbot">
 
 <head>
-    <title>Food TakeOut</title>
+    <title>Combo's TakeOut</title>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link href="./css/main.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <style>
-        body {
-            font-family: 'Roboto'
-        }
-        #menuBanner h5 {
-            color: white;
-            font-weight: bold;
-        }
-        #menuBanner .badge {
-            margin-top: 8px;
-            background-color: #000;
-        }
-        #menuBanner .list-group-item:first-child {
-            border-top-left-radius: 0px;
-            border-top-right-radius: 0px;
-        }
-        #menuBanner .list-group-item:last-child {
-            margin-bottom: 0;
-            border-bottom-right-radius: 0px;
-            border-bottom-left-radius: 0px;
-        }
-        #menuBanner .list-group-item {
-            padding: 5px 10px;
-            border: 1px solid #ac1a17;
-        }
-        #orderForm input[type=text] {
-            border: 1px solid #ac1a17;
-            color: #ac1a17;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        #orderForm button {
-            border-color: #ac1a17;
-            background-color: #ac1a17;
-            color: #fff;
-            font-weight: bold;
-        }
-        #conversationBox {
-            height: 250px;
-            overflow-y: auto;
-        }
-        #conversationBox::-webkit-scrollbar {
-            width: 10px;
-            background-color: #F5F5F5;
-        }
-        #conversationBox::-webkit-scrollbar-thumb {
-            border-radius: 10px;
-            background: linear-gradient(left, #96A6BF, #63738C);
-            box-shadow: inset 0 0 1px 1px #5C6670;
-        }
-        #conversationBox::-webkit-scrollbar-track {
-            border-radius: 10px;
-            background: #eee;
-            box-shadow: 0 0 1px 1px #bbb, inset 0 0 7px rgba(0, 0, 0, 0.3)
-        }
-        #conversationBox::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(left, #8391A6, #536175);
-        }
-
-        .userTypedContainer {
-            font-size: 12px;
-            margin: 0px 0px;
-        }
-        .userTypedContainer div {
-            display: inline-block;
-        }
-        #conversationBox .badge {
-            background-color: #000;
-        }
-        #conversationBox .userTyped {
-            color: #ac1a17;
-            font-weight: bold;
-            word-wrap:break-word;
-        }
-        #conversationBox .botTyped {
-            background-color: #ac1a17;
-            color: #fff;
-            padding: 5px 5px;
-            border-radius: 6px;
-            word-wrap:break-word;
-        }
-    </style>
 </head>
 
 <body ng-controller="gblController">
@@ -180,7 +99,7 @@
                 <br>
                 <div id="conversationBox" data-ng-class="{'expand':expandConversationBox}">
                     <div class="list-group special" style="margin-bottom:0px">
-                        <div class="list-group-item" style="padding:0px 0px;margin:2px 0px;border:0;border-style:none;" data-ng-repeat="item in conversationArr"
+                        <div class="list-group-item" style="padding:0px 0px;margin:5px 0px;border:0;border-style:none;" data-ng-repeat="item in conversationArr"
                             compile="item.text"></div>
                     </div>
                 </div>

@@ -17,6 +17,8 @@ app.controller('gblController', ['$scope', 'botAPI', function($scope, botAPI){
     console.log('gblController initiated');
     $scope.userSearchQuery = "";
     $scope.conversationArr = [];
+    $scope.defaultChatMessage = {text:"<div class='row userTypedContainer'><div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'><div><img src='./img/chatbot_icon.gif' style='height:40px;width:40px;'></div><div class='botTyped'><span>Hello,<br>I'm a Chatbot and can help you order your food!<br>You can place an order like:<br>\" I'll have Nachos, a Classic Smash with a Coke. \"</span></div></div></div>"};
+    $scope.conversationArr.push($scope.defaultChatMessage);
     $scope.botSubmit = function(){
         console.log('user entered text: ', $scope.userSearchQuery);
         if ($scope.userSearchQuery === ""){
@@ -35,6 +37,7 @@ app.controller('gblController', ['$scope', 'botAPI', function($scope, botAPI){
         }, (err) => {
             console.log('botAPI.callbotapi error: ',err);
             $scope.$emit('animateScroll', '<==== scroll to bottom ====>');
+            alert('Session expired. Please refresh the webpage!');
         })
     }
 
@@ -52,6 +55,7 @@ app.run(['$rootScope', 'ajax', function($rootScope, ajax){
         console.log('ajax.callrestget success result: ', JSON.stringify(response));
         $rootScope.access_token = typeof(response.data.token) !== "undefined" ? response.data.token : "";
     }, (err) => {
+        alert('Session expired. Please refresh the webpage!');
         console.log('ajax.callrestget error: ',err);
     });
 }])
@@ -71,7 +75,7 @@ app.service('botAPI', ['$http','$rootScope', function ($http, $rootScope) {
     this.callBOTAPI = function (_keyword) {
         console.log('<==== botAPI service iniated with: '+$rootScope.access_token);
         if(typeof($rootScope.access_token) === "undefined" || $rootScope.access_token === ""){
-            alert('fatal error - no token found!');
+            alert('Session expired, please refresh the webpage!');
             return;
         }
         var _data = JSON.stringify({queryParams:{}, query_input:{text:{text:_keyword,language_code:"en-US"}},outputAudioConfig:{},inputAudio:""});
