@@ -78,7 +78,7 @@ app.service('botAPI', ['$http','$rootScope', function ($http, $rootScope) {
             alert('Session expired, please refresh the webpage!');
             return;
         }
-        var _data = JSON.stringify({queryParams:{}, query_input:{text:{text:_keyword,language_code:"en-US"}},outputAudioConfig:{},inputAudio:""});
+        var _data = JSON.stringify({queryParams:{}, query_input:{text:{text:_keyword,language_code:"en-US"}}});
         var _headers = {"Authorization": "Bearer " +$rootScope.access_token};
         return $http.post("https://dialogflow.googleapis.com/v2/projects/takeout-7e4ca/agent/sessions/123456789:detectIntent", _data, {"headers": _headers});
     }
